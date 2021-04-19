@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 
-from application.commands import serve, greet, run
+from application.commands import serve, greet
 
 def main():
     """Main method of the application."""
