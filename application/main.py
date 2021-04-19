@@ -4,6 +4,11 @@ from argparse import ArgumentParser
 
 from application.commands import serve, greet
 
+import pandas
+
+
+
+
 def main():
     """Main method of the application."""
     # Create an argument parser for parsing CLI arguments
