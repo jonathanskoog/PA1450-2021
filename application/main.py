@@ -19,6 +19,7 @@ def main():
     # Parse the arguments and execute the chosen command
     options = parser.parse_args()
     options.command(options)
+    ckjnkkcnjkd
 
 if __name__ == "__main__":
     main()
