@@ -20,6 +20,7 @@ def main():
     options = parser.parse_args()
     options.command(options)
     print("hej")
+    
     print("bjbhjbhj")
 
 if __name__ == "__main__":
