@@ -1,6 +1,6 @@
 def run(options):
     """Run"""
-    print("Run !")
+    print("Run  !")
 
 def create_parser(subparsers):
     parser = subparsers.add_parser("run")
