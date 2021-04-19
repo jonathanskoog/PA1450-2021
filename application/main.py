@@ -4,6 +4,12 @@ from argparse import ArgumentParser
 
 from application.commands import serve, greet
 
+import pandas as pd
+import plotly.express as px
+
+
+
+
 def main():
     """Main method of the application."""
     # Create an argument parser for parsing CLI arguments
@@ -20,10 +26,11 @@ def main():
     # Parse the arguments and execute the chosen command
     options = parser.parse_args()
     options.command(options)
-<<<<<<< HEAD
     
-=======
->>>>>>> 74bedcb094b70ecec6d1864c859864f83b6e8fc2
+    df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_apple_stock.csv')
+
+    fig = px.line(df, x = 'AAPL_x', y = 'AAPL_y', title='Apple Share Prices over time (2014)')
+    fig.show()
 
 if __name__ == "__main__":
     main()
