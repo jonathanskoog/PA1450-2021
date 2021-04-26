@@ -1,5 +1,8 @@
 """Module for serving an API."""
 
+from io import BytesIO
+import matplotlib.pyplot as plot
+import numpy
 from flask import Flask, send_file
 
 
@@ -22,6 +25,28 @@ def serve(options):
     def greeting(name):
         """Return a greeting for the user."""
         return "Hello, {}!".format(name)
+
+
+    @app.route("/add/<a>/<b>")
+    def add(a, b):
+        """Return a greeting for the user."""
+        return str(int(a)+int(b))
+
+
+   @app.route("/plot/<number_of_points>")
+    def random_plot(number_of_points):
+        """Return a greeting for the user."""
+        values = numpy.random.rand(int(number_of_points))
+        plot.plot(values)
+        plot.ylabel("Values")
+        plot.title("Random Values")
+        image = BytesIO()
+        plot.savefig(image)
+        image.seek(0)
+        plot.close('all')
+        return send_file(image, mimetype='image/png')
+
+
 
     app.run(host=options.address, port=options.port, debug=True)
 

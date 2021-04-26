@@ -4,8 +4,8 @@
 
 # from application.commands import serve, greet
 
-import pandas as pd
-import matplotlib.pyplot as plt
+# import pandas as pd
+# import matplotlib.pyplot as plt
 # import plotly.express as px
 
 
@@ -29,23 +29,23 @@ def main():
     
 
 
-    plt.style.use("bmh")
-    # df = pd.read_csv('prices.csv')
-    df = pd.read_csv('covid_stats.csv')
+    # plt.style.use("bmh")
+    # # df = pd.read_csv('prices.csv')
+    # df = pd.read_csv('covid_stats.csv')
 
     
-    x = df['Province_State']
-    y = df['Deaths']
+    # x = df['Province_State']
+    # y = df['Deaths']
 
 
-    plt.xlabel('Province_State', fontsize=18)
-    plt.ylabel('Deaths', fontsize=16)
-    plt.scatter(x, y)
-    plt.plot(x, y)
+    # plt.xlabel('Province_State', fontsize=18)
+    # plt.ylabel('Deaths', fontsize=16)
+    # plt.scatter(x, y)
+    # plt.plot(x, y)
 
-    plt.savefig('foo.png', bbox_inches='tight')
+    # plt.savefig('foo.png', bbox_inches='tight')
 
-    plt.show()
+    # plt.show()
     
 
 
