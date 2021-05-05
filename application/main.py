@@ -1,8 +1,8 @@
 """Main module of the application"""
 
-# from argparse import ArgumentParser
+from argparse import ArgumentParser
 
-# from application.commands import serve, greet
+from application.commands import serve, greet
 
 # import pandas as pd
 # import matplotlib.pyplot as plt
@@ -14,18 +14,18 @@
 def main():
     """Main method of the application."""
     # Create an argument parser for parsing CLI arguments
-    # parser = ArgumentParser(description="An example application")
-    # # Create collection of subparsers, one for each command such as "download"
-    # subparsers = parser.add_subparsers(dest="command")
-    # subparsers.required = True
+    parser = ArgumentParser(description="An example application")
+    # Create collection of subparsers, one for each command such as "download"
+    subparsers = parser.add_subparsers(dest="command")
+    subparsers.required = True
 
-    # # Add the parser for each specific command
-    # serve.create_parser(subparsers)
-    # greet.create_parser(subparsers)
+    # Add the parser for each specific command
+    serve.create_parser(subparsers)
+    greet.create_parser(subparsers)
 
-    # # Parse the arguments and execute the chosen command
-    # options = parser.parse_args()
-    # options.command(options)
+    # Parse the arguments and execute the chosen command
+    options = parser.parse_args()
+    options.command(options)
     
 
 

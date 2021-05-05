@@ -33,7 +33,7 @@ def serve(options):
         return str(int(a)+int(b))
 
 
-   @app.route("/plot/<number_of_points>")
+    @app.route("/plot/<number_of_points>")
     def random_plot(number_of_points):
         """Return a greeting for the user."""
         values = numpy.random.rand(int(number_of_points))
