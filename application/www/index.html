@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <link rel="scrollable" href="scroll.css"> -->
   <title>Covid-Center</title>
   <meta name="description" content="PA1450"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -11,6 +12,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<style>
+  .scrollable-menu {
+    height: auto;
+    max-height: 180px;
+    overflow-x: hidden;
+  }
+</style>
 <body>
   <div class="jumbotron text-center bg-dark text-white">
     <h1>Covid Center</h1>
@@ -27,12 +35,20 @@
     <div class="row">
       <div class="col-sm-1"></div>
       <div class="col-sm-1">
-        <button type="submit" name="action" onclick="load_csv()" class="btn btn-primary btn-block bg-lg">Load</button>
+        <button type="submit" id="button1" name="action" onclick="load_csv()" class="btn btn-primary btn-block bg-lg">Load</button>
       </div>
       <div class="form-group col-sm-8">
         <input type="text" class="form-control" id="File-Url" name="File-Url" placeholder="Raw Url">
       </div>
       <div class="col-sm-2"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="jumbotron text-center bg-primary text-white" id="csv_load_status">
+          <h3>Press load</h3>
+        </div>
+      </div>
     </div>
 
 
@@ -46,14 +62,13 @@
               <button class="btn btn-secondary dropdown-toggle" type="button" id="Filter-Country" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Filter by country
               </button>
-              <div class="dropdown-menu" id="FC-DROP" aria-labelledby="Filter-Country">
+              <div class="dropdown-menu scrollable-menu" id="FC-DROP" aria-labelledby="Filter-Country" type="menu">
+                <a class="dropdown-item btn" id="drop1-btn1"onclick="set_dropdown_text(Filter-Country,drop1-btn1)" ref="#">Sverige</a>
               </div>
             </div>
           </div>
       </div>
-      <div class="col-sm-10">
-        <img src="/plot">
-      </div>
+
     </div>
 
 
@@ -89,6 +104,50 @@
         
 
   </script> -->
+<script>
+
+function load_csv()
+{
+  var jqXHR = $.post("/saveCSV", {
+    csv_file: document.getElementById("File-Url").value
+  })
+  .done(function(response) {
+    load_status(response);
+    get_countries();
+  })
+  
+}
+
+function get_countries()
+{
+  var jqXHR = $.get("/countries")
+  .done(function(response){
+    console.log(response)
+  })
+}
+
+function set_dropdown_text(drop_id="", text_id="")
+{
+  document.getElementById(drop_id).innerHTML = "Sverige"
+}
+
+function load_status(status="")
+{
+  var jumbo = document.getElementById("csv_load_status")
+  if (status == "success")
+  {
+    jumbo.classList.remove("bg-dark")
+    jumbo.classList.add("bg-success")
+    jumbo.innerHTML = "<h3>Success!</h3>"
+  } 
+  else
+  {
+    jumbo.classList.remove("bg-dark")
+    jumbo.classList.add("bg-danger")
+    jumbo.innerHTML = "<h3>Error, Try again!</h3>"
+  }
+}
+</script>
 
   <!-- <h1>MVP Covid-Center</h1>
   <label for="furl">Raw GitHub file Url:</label>
