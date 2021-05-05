@@ -84,6 +84,14 @@
         </div>
     </div>
 
+    <form action="/drawTABLE" method="post" enctype="multipart/form-data">
+
+    <button type="submit" id="button1" name="action" class="btn btn-primary btn-block bg-lg">Load</button>
+
+    </form>
+
+   
+        
 
 <script>
 
@@ -95,6 +103,19 @@ function load_csv()
   .done(function(response) {
     load_status(response);
     plot_graph()
+  })
+  
+}
+
+
+function draw_table()
+{
+  var jqXHR = $.post("/drawTABLE", {
+    csv_file: document.getElementById("File-Url").value
+  })
+  .done(function(response) {
+    load_status(response);
+    //get_countries();
   })
   
 }
@@ -162,5 +183,7 @@ function load_status(status="")
 
   <img src="/plot/5"/>
 -->
+  
+  
 </body>
 </html>
