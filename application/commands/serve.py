@@ -1,6 +1,12 @@
 """Module for serving an API."""
 
-from flask import Flask, send_file
+from flask import Flask, send_file, request
+from application.program import input_handler as inp
+from application.program import create_graph as cg
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+import matplotlib.pyplot as plot
+from flask import Response
 
 def serve(options):
     """Serve an API."""
@@ -8,16 +14,48 @@ def serve(options):
     # Create a Flask application
     app = Flask(__name__)
 
-    @app.route("/")
+    @app.route("/", methods=['POST','GET'])
     def index():
         """Return the index page of the website."""
         return send_file("../www/index.html")
 
-    @app.route("/greeting/<name>")
-    def greeting(name):
-        """Return a greeting for the user."""
-        return "Hello, {}!".format(name)
+    # @app.route("/extract/<url>", methods=['POST'])
+    # def extract(url):
+    #     git_csv = inp.extract_csv(url)
+    #     with open("..\\csv_cache\\cache1.csv","w") as cache_csv:
+    #         writer = csv.writer(cache_csv)
+    #         writer.writerows(git_csv)
+        
+    #     return send_file("../www/index.html")
 
+        
+
+
+    # @app.route("/plot/<yAxis>/<xAxis>/data", methods=['POST'])
+    # def plot(y,x,data):
+    #     plot.plot()
+    #     image = io.BytesIO()
+    #     plot.savefig(image)
+    #     image.seek(0)
+    #     return send_file(image, mimetype='image/png')
+
+
+    # @app.route("/show_graph", methods=['POST'])
+    # def show_graph():
+    #     git_url = request.form['furl']
+    #     if request.form['action'] == 'Display Graph':
+    #         data = cg.read_giturl(git_url)
+    #         plt = cg.plot_graph(data)
+    #         output = io.BytesIO()
+    #         FigureCanvas(plt.get_figure()).print_png(output)
+    #         return Response(output.getvalue(), mimetype='image/png')
+
+    #     elif request.form['action']== 'Display Table':
+    #         return "Table"
+
+    #     return request.form['action']
+        
+    
     app.run(host=options.address, port=options.port, debug=True)
 
 def create_parser(subparsers):

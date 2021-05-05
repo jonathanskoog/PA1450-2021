@@ -2,12 +2,9 @@
 
 from argparse import ArgumentParser
 
-from application.commands import serve, greet
+from application.commands import serve, greet, run
 
-import pandas
-
-
-
+from application.program import create_graph
 
 def main():
     """Main method of the application."""
@@ -25,7 +22,6 @@ def main():
     # Parse the arguments and execute the chosen command
     options = parser.parse_args()
     options.command(options)
-    
 
 if __name__ == "__main__":
     main()

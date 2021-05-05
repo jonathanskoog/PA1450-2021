@@ -58,21 +58,6 @@
 
 
 <script>
-
-  function load_csv()
-  {
-    var git_url = document.getElementById("File-Url").value;
-    var path = "/extract/";
-    $.post(path.concat(git_url), {},9)
-  }
-  var countryDropDown = document.getElementById("FC-DROP");
-  for(let i = 0; i < 5; i++)
-  {
-    var dropItem = document.createElement("a");
-    dropItem.className = "dropdown-item";
-    dropItem.innerHTML = i;
-    countryDropDown.appendChild(dropItem);
-  }
 </script>
 
   <!-- <h1>MVP Covid-Center</h1>
