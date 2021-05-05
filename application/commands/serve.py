@@ -1,5 +1,6 @@
 """Module for serving an API."""
 
+<<<<<<< HEAD
 from flask import Flask, send_file, request
 from application.program import input_handler as inp
 from application.program import create_graph as cg
@@ -7,6 +8,14 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plot
 from flask import Response
+=======
+from io import BytesIO
+import matplotlib.pyplot as plot
+import numpy
+from flask import Flask, send_file
+>>>>>>> dba39019f641092c4ce7d7eba85278bea5b59fd6
+
+
 
 def serve(options):
     """Serve an API."""
@@ -14,7 +23,14 @@ def serve(options):
     # Create a Flask application
     app = Flask(__name__)
 
+<<<<<<< HEAD
     @app.route("/", methods=['POST','GET'])
+=======
+
+    
+
+    @app.route("/")
+>>>>>>> dba39019f641092c4ce7d7eba85278bea5b59fd6
     def index():
         """Return the index page of the website."""
         return send_file("../www/index.html")
@@ -28,6 +44,7 @@ def serve(options):
         
     #     return send_file("../www/index.html")
 
+<<<<<<< HEAD
         
 
 
@@ -56,6 +73,30 @@ def serve(options):
     #     return request.form['action']
         
     
+=======
+
+    @app.route("/add/<a>/<b>")
+    def add(a, b):
+        """Return a greeting for the user."""
+        return str(int(a)+int(b))
+
+
+   @app.route("/plot/<number_of_points>")
+    def random_plot(number_of_points):
+        """Return a greeting for the user."""
+        values = numpy.random.rand(int(number_of_points))
+        plot.plot(values)
+        plot.ylabel("Values")
+        plot.title("Random Values")
+        image = BytesIO()
+        plot.savefig(image)
+        image.seek(0)
+        plot.close('all')
+        return send_file(image, mimetype='image/png')
+
+
+
+>>>>>>> dba39019f641092c4ce7d7eba85278bea5b59fd6
     app.run(host=options.address, port=options.port, debug=True)
 
 def create_parser(subparsers):
