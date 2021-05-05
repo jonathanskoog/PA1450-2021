@@ -69,6 +69,19 @@
           </div>
       </div>
 
+      <div class="col-sm-10">
+        <img src="" id="graph_preview"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2">
+        <form action="/plotGraph" method="post" enctype="multipart/form-data">
+          <button type="submit" id="buttonGraph" name="action" class="btn btn-primary btn-block bg-lg">Graph</button>
+        </form>
+        <form action="/" method="post" enctype="multipart/form-data">
+          <button type="submit" id="buttonTable" name="action" class="btn btn-primary btn-block bg-lg">Table</button>
+        </form>
+        </div>
     </div>
 
 
@@ -81,7 +94,7 @@ function load_csv()
   })
   .done(function(response) {
     load_status(response);
-    get_countries();
+    plot_graph()
   })
   
 }
@@ -91,6 +104,18 @@ function get_countries()
   var jqXHR = $.get("/countries")
   .done(function(response){
     console.log(response)
+  })
+}
+
+function plot_graph()
+{
+  $.post("/plotGraph", {
+    country: "Recovered",
+    x_axis: "Recovered",
+    y_axis: "Confirmed"
+  })
+  .done(function(data){
+    console.log(data)
   })
 }
 
@@ -136,6 +161,6 @@ function load_status(status="")
 
 
   <img src="/plot/5"/>
-  
+-->
 </body>
 </html>

@@ -8,6 +8,7 @@ from flask import Response
 import csv
 import pandas as pd
 import os
+import io
 
 
 def serve(options):
@@ -26,11 +27,26 @@ def serve(options):
         csv_url = request.form["csv_file"]
         try:
             csv_data = pd.read_csv(csv_url)
-            with open("application/csv_cache/cache1.csv", "w") as csv_file:
-                csv_file.write(csv_data.to_string())
+            # with open("application/csv_cache/cache1.csv", "w", newline="") as csv_file:
+            #     csv_file.write(csv_data.to_string())
+            csv_data.to_csv("application/csv_cache/cache1.csv", index = False, header=True)
             return "success"
         except:
             return "error"
+    
+    @app.route("/plotGraph", methods=['POST'])
+    def plotGraph():
+        country = request.form["country"]
+        # Get countries data
+
+        x_axis = request.form["x_axis"]
+        y_axis = request.form["y_axis"]
+        data = pd.read_csv("application/csv_cache/cache1.csv",delimiter=',', header=0, encoding='ascii')
+        plt = data.plot(x="Country/Region", y=y_axis)
+        image = io.BytesIO()
+        FigureCanvas(plt.get_figure()).print_png(image)
+        return Response(image.getvalue(), mimetype='image/png')
+
 
     # @app.route("/generate/plot", methods=['POST','GET'])
     # def generate_plot():
