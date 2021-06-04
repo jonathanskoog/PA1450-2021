@@ -1,0 +1,163 @@
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <!-- <link rel="scrollable" href="scroll.css"> -->
+  <title>Covid-Center</title>
+  <meta name="description" content="PA1450"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<style>
+.scrollable-menu {
+    height: auto;
+    max-height: 180px;
+    overflow-x: hidden;
+}
+.top-buffer {
+    margin-top:-32px;
+}
+.padding-0{
+        padding-right:0;
+        padding-left:0;
+}
+.carousel-1 {
+    width:640px;
+    height:360px;
+}
+/* #Megatron{
+    position: ;
+} */
+</style>
+<body>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="jumbotron text-center bg-dark text-white">
+            <h1>Covid Center</h1>
+            <p>Track covid data from all around the world!</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center">
+            <h3>Select how you want to display the data:</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+        <button class="btn btn-lg btn-block btn-primary" id="btnGraph" onclick="set_btn_success(id)" type="button">Graph</button>
+        <button class="btn btn-lg btn-block btn-dark" id="btnTable" onclick="set_btn_success(id)" type="button">Table</button>
+    </div>
+    <div class="col-sm-10 padding-0 jumbotron jumbotron-fluid bg-dark text-white">
+        <ul class="nav justify-content-center nav-fill">
+            <li class="nav-item">
+                <label for="dropdown1"><h4>Time span: </h4></label>
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button class="btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Recent</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown1">
+                          <a class="dropdown-item" id="dropRecent" onclick="set_dropdown(id, 'dropdown1')">Recent</a>
+                          <a class="dropdown-item" id="dropDays" onclick="set_dropdown(id, 'dropdown1')">7 Days</a>
+                          <a class="dropdown-item" id="dropMonth" onclick="set_dropdown(id, 'dropdown1')">Month</a>
+                          <a class="dropdown-item" id="dropMonths" onclick="set_dropdown(id, 'dropdown1')">3 Months</a>
+                          <a class="dropdown-item" id="dropYear" onclick="set_dropdown(id,'dropdown1')">1 Year</a>
+                          <a class="dropdown-item" id="dropBeginning" onclick="set_dropdown(id,'dropdown1')">Beginning</a>
+                        </div>
+                      </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <label for="dropdown2"><h4>Type: </h4></label>
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button class="btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdown2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">New</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown2">
+                          <a class="dropdown-item" id="dropNew" onclick="set_dropdown(id, 'dropdown2')">New</a>
+                          <a class="dropdown-item" id="dropOverall" onclick="set_dropdown(id, 'dropdown2')">Overall</a>
+                        </div>
+                      </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <label for="dropdown3"><h4>Cases by: </h4></label>
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button class="btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Ordinary</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown3">
+                          <a class="dropdown-item" id="dropOrdinary" onclick="set_dropdown(id, 'dropdown3')">Ordinary</a>
+                          <a class="dropdown-item" id="dropCapita" onclick="set_dropdown(id, 'dropdown3')">Capita</a>
+                        </div>
+                      </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <label for="dropdown4"><h4>Display: </h4></label>
+                <div class="btn-group">
+                    <div class="dropdown">
+                        <button class="btn btn-lg btn-primary dropdown-toggle" type="button" id="dropdown4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Country</button>
+                        <div class="dropdown-menu" aria-labelledby="dropdown4">
+                          <a class="dropdown-item" id="dropCountry4" onclick="set_dropdown(id, 'dropdown4')">Country</a>
+                          <a class="dropdown-item" id="dropRegion4" onclick="set_dropdown(id, 'dropdown4')">Region</a>
+                        </div>
+                      </div>
+                </div>
+            </li>
+          </ul>
+            
+            
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <div class="jumbotron jumbotron-fluid text-white bg-dark top-buffer" id="Megatron">
+            <div>
+                <div class="text-center">
+                    <h3>Options</h3>
+                </div>
+                <hr class="my-4">
+            </div>
+            <div>
+                <h4>Country</h4>
+                <input type="text" class="form-control" id="Country-filter" name="filter" placeholder="Country">
+                <br>
+            </div>
+            <div>
+                <h4>Region</h4>
+                <input type="text" class="form-control" id="Region-filter" name="filter" placeholder="Region">
+                <br>
+            </div>
+            <div>
+                <h4>Filter</h4>
+                <input type="text" class="form-control" id="case-filter" name="filter" placeholder="Filter">
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-10">
+        <a href="" id="downloadGraph" download>
+            <img id="previewGraph" src="">
+        </a>
+        <div id="previewTable">
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2">
+        <button class="btn btn-lg btn-block btn-primary" onclick="render_graphic()" id="btnGenerate" type="button">Render</button>
+    </div>
+    <div class="col-sm-10"></div>
+</div>
+
+
+<script src="test_scripts.js"></script>
+</body>
+</html>

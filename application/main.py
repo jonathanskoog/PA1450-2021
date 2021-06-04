@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 
-from application.commands import serve, greet
+from application.commands import serve, greet, test
 
 def main():
     """Main method of the application."""
@@ -15,6 +15,7 @@ def main():
     # Add the parser for each specific command
     serve.create_parser(subparsers)
     greet.create_parser(subparsers)
+    test.create_parser(subparsers)
 
     # Parse the arguments and execute the chosen command
     options = parser.parse_args()
